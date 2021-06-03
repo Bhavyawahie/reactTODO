@@ -1,13 +1,13 @@
 import React from "react"
-import Header from "./components/Header"
-import Footer from "./components/Footer"
-import Note from "./components/Note"
+import Header from "./Header"
+import Note from "./Note"
+import Footer from "./Footer"
 
 const App = () => {
     return <div>
         <Header/>
         <Note/>
-        <App/>
+        <Footer/>
         </div>
 }
 export default App
