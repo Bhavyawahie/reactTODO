@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-const CreateArea = () => {
+const CreateArea = (props) => {
     const [input, setInput] = useState({
         title: "",
         content: ""
@@ -14,13 +14,22 @@ const CreateArea = () => {
             }
         });
     }
+    const submissionHandler = (event) => {
+        props.onSubmit(input);
+        setInput({
+            title: "",
+            content: ""
+        });
+        event.preventDefault();
+        //console.log("I was clicked and form is supposed to be submitted");
+    }
 
     return (
         <div>
             <form>
-                <input name="title" placeholder="Title" onChange={inputChangeHandler}/>
-                <textarea name="content" placeholder="Take a note..." onChange={inputChangeHandler} id="" rows="3"/>
-                <button>+</button>
+                <input name="title" placeholder="Title" onChange={inputChangeHandler} value={input.title} autoComplete="off"/>
+                <textarea name="content" placeholder="Take a note..." onChange={inputChangeHandler}  value={input.content} rows="3"/>
+                <button onClick={submissionHandler} disabled={input.title.length<1}>+</button>
             </form>
         </div>
     )
