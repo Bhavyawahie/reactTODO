@@ -1,23 +1,22 @@
 import React from "react"
 import Header from "./Header"
+import CreateArea from "./CreateArea"
 import Note from "./Note"
 import Footer from "./Footer"
-import notes from "../notes"
-import CreateArea from "./CreateArea"
 
-const noteInit = (note) => {
-    return <Note
-        key={note.key}
-        title={note.title}
-        content={note.content}
-    />
-}
+// const noteInit = (note) => {
+//     return 
+// }
 
 const App = () => {
     return <div>
         <Header/>
         <CreateArea/>
-        {notes.map(noteInit)}
+        <Note
+        key={1}
+        title="Note Title"
+        content="note.content"
+    />
         <Footer/>
         </div>
 }
