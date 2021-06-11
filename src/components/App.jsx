@@ -3,6 +3,7 @@ import Header from "./Header"
 import Note from "./Note"
 import Footer from "./Footer"
 import notes from "../notes"
+import CreateArea from "./CreateArea"
 
 const noteInit = (note) => {
     return <Note
@@ -15,6 +16,7 @@ const noteInit = (note) => {
 const App = () => {
     return <div>
         <Header/>
+        <CreateArea/>
         {notes.map(noteInit)}
         <Footer/>
         </div>
