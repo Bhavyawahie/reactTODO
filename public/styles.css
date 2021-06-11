@@ -62,7 +62,9 @@ footer p {
   width: 36px;
   height: 36px;
   cursor: pointer;
-  ouutline: none;
+  border: none;
+  background-color: #fff;
+  outline: none;
 }
 form {
   position: relative;
