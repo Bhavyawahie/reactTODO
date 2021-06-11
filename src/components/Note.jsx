@@ -5,7 +5,7 @@ const Note = (prop) => {
     <div className="note">
         <h1>{prompt.title}</h1>
         <p>{prop.content}</p>
-        <button>Delete</button>
+        <button>DELETE</button>
     </div>
     );
 }

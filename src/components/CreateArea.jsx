@@ -1,12 +1,13 @@
 import React, { useState } from "react"
 
 const CreateArea = () => {
+
     return (
         <div>
-            <form action="">
-            <input type="text" />
-            <textarea name="" id="" cols="30" rows="10"></textarea>
-            <button></button>
+            <form>
+            <input name="title" placeholder="Title" />
+            <textarea name="content" placeholder="Take a note..." id="" rows="3"/>
+            <button>+</button>
             </form>
         </div>
     )
