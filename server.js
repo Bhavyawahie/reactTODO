@@ -1,12 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const { v4: uuidv4 } = require('uuidv4');
+const { v4: uuidv4 } = require('uuid');
 const app = express();
 
 mongoose.connect("mongodb://localhost:27017/reactTodoDB", {useNewUrlParser: true, useUnifiedTopology: true});
 
 const noteSchema = new mongoose.Schema({
-    id: String
+    id: String,
     title: {
         type: String,
         required: [true, "Title is required to create a new note!"]
@@ -15,6 +15,16 @@ const noteSchema = new mongoose.Schema({
 });
 
 const Note = mongoose.model("Note", noteSchema);
+
+// const testNote = new Note({
+//     id: uuidv4(),
+//     title:"my todo list",
+//     content:"This is the content of my list"
+// });
+// testNote.save();
+
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 
 
 app.route("/")
@@ -32,7 +42,7 @@ app.route("/")
 
     .post((req, res) => {
         const newNote = Note({
-            id: uuidv4();
+            id: uuidv4(),
             title: req.body.title,
             content: req.body.content
         });
@@ -48,7 +58,6 @@ app.route("/")
     })
 
     .delete((req, res) => {
-        const id = req.body.id
         Note.deleteOne({id: req.body.id}, (err) => {
             if(err){
                 console.error(err);
