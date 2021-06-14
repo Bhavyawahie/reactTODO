@@ -35,7 +35,7 @@ app.route("/")
         Note.find({}, (err, foundNotes) => {
             if(!err){
                 res.status(200).json(foundNotes);
-                export 
+                //export 
             }
             else{
                 console.error(err);
