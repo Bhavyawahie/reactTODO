@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const { v4: uuidv4 } = require('uuid');
+const cors = require('cors')
 const app = express();
 
 mongoose.connect("mongodb://localhost:27017/reactTodoDB", {useNewUrlParser: true, useUnifiedTopology: true});
@@ -25,6 +26,7 @@ const Note = mongoose.model("Note", noteSchema);
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(cors());
 
 
 app.route("/")
@@ -33,6 +35,7 @@ app.route("/")
         Note.find({}, (err, foundNotes) => {
             if(!err){
                 res.status(200).json(foundNotes);
+                export 
             }
             else{
                 console.error(err);
@@ -72,3 +75,4 @@ app.listen(4000, () => {
     console.log("Server started at http://localhost:4000")
 });
 //epiphany
+
