@@ -1,12 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const { v4: uuidv4 } = require('uuidv4');
+const { v4: uuidv4 } = require('uuid');
+const cors = require('cors')
 const app = express();
 
 mongoose.connect("mongodb://localhost:27017/reactTodoDB", {useNewUrlParser: true, useUnifiedTopology: true});
 
 const noteSchema = new mongoose.Schema({
-    id: String
+    id: String,
     title: {
         type: String,
         required: [true, "Title is required to create a new note!"]
@@ -16,6 +17,17 @@ const noteSchema = new mongoose.Schema({
 
 const Note = mongoose.model("Note", noteSchema);
 
+// const testNote = new Note({
+//     id: uuidv4(),
+//     title:"my todo list",
+//     content:"This is the content of my list"
+// });
+// testNote.save();
+
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+app.use(cors());
+
 
 app.route("/")
 
@@ -23,6 +35,7 @@ app.route("/")
         Note.find({}, (err, foundNotes) => {
             if(!err){
                 res.status(200).json(foundNotes);
+                export 
             }
             else{
                 console.error(err);
@@ -32,7 +45,7 @@ app.route("/")
 
     .post((req, res) => {
         const newNote = Note({
-            id: uuidv4();
+            id: uuidv4(),
             title: req.body.title,
             content: req.body.content
         });
@@ -48,7 +61,6 @@ app.route("/")
     })
 
     .delete((req, res) => {
-        const id = req.body.id
         Note.deleteOne({id: req.body.id}, (err) => {
             if(err){
                 console.error(err);
@@ -63,3 +75,4 @@ app.listen(4000, () => {
     console.log("Server started at http://localhost:4000")
 });
 //epiphany
+
