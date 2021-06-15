@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 const cors = require('cors')
 const app = express();
 
-mongoose.connect("mongodb://localhost:27017/reactTodoDB", {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect("mongodb://localhost:27017/reactTodoDB", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
 
 const noteSchema = new mongoose.Schema({
     id: String,
@@ -29,9 +29,9 @@ app.use(express.json());
 app.use(cors());
 
 
-app.route("/")
 
-    .get((req, res) => {
+
+    app.get("/notes",(req, res) => {
         Note.find({}, (err, foundNotes) => {
             if(!err){
                 res.status(200).json(foundNotes);
@@ -43,7 +43,7 @@ app.route("/")
         });
     })
 
-    .post((req, res) => {
+    app.post("/notes/:id", (req, res) => {
         const newNote = Note({
             id: uuidv4(),
             title: req.body.title,
@@ -60,8 +60,10 @@ app.route("/")
 
     })
 
-    .delete((req, res) => {
-        Note.deleteOne({id: req.body.id}, (err) => {
+    app.delete("/notes/:id", async (req, res) => {
+        const id = req.params.id
+        try {
+            await Note.findOneAndRemove( {id: id}, (err) => {
             if(err){
                 console.error(err);
             }
@@ -69,6 +71,10 @@ app.route("/")
                 res.send("Article Deleted Successfully!");
             }
         });
+    }
+    catch(err){
+        if (err) throw err;
+    }
     });
 
 app.listen(4000, () => {
