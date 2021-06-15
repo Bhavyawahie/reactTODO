@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
+import axios from "axios";
 
 const CreateArea = (props) => {
     const [input, setInput] = useState({
