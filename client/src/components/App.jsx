@@ -11,7 +11,7 @@ const App = () => {
     
     useEffect(() => {
         const getNotefromServer = async () => {
-            const res = await axios.get("http://localhost:4000");
+            const res = await axios.get("http://localhost:4000/notes");
             setNotes(res.data);
             console.log(res.data);
         }
@@ -19,18 +19,17 @@ const App = () => {
     }, [])
     //Takes a note from the createarea component and pushes it into the DB while maintaining its state
     const noteInit = async (note) => {
-        const res = axios.post("http://localhost:4000", note)
+        const res = await axios.post(`http://localhost:4000/notes/${note.id}`, note)
         setNotes(prevVal => {
             return [...prevVal, note]
         });
     }
 
-    const noteDel = (id) => {
-        setNotes(prevVal => {
-            return prevVal.filter((note, index) => {
-                        return index !==id
-                    })
-        })
+    const noteDel = async (id) => {
+        const res = await axios.delete(`http://localhost:4000/notes/${id}`)
+        await setNotes(notes.filter(note => {
+            return note.id !== id
+        }));
     }
 
     return <div>
@@ -41,7 +40,7 @@ const App = () => {
             return( 
                 <Note
                     key={index}
-                    id={index} 
+                    id={note.id} 
                     title={note.title} 
                     content={note.content}
                     onDelClick={noteDel}
