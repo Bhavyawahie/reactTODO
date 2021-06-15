@@ -8,9 +8,18 @@ import Footer from "./Footer"
 
 const App = () => {
     const [notes, setNotes] = useState([])
+    
+    useEffect(() => {
+        const getNotefromServer = async () => {
+            const res = await axios.get("http://localhost:4000");
+            setNotes(res.data);
+            console.log(res.data);
+        }
+        getNotefromServer();
+    }, [])
     //Takes a note from the createarea component and pushes it into the DB while maintaining its state
-    const noteInit = (note) => {
-        axios.post("http://localhost:4000", note)
+    const noteInit = async (note) => {
+        const res = axios.post("http://localhost:4000", note)
         setNotes(prevVal => {
             return [...prevVal, note]
         });
