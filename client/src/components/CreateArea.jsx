@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import AddIcon from "@material-ui/icons/Add"
 
 const CreateArea = (props) => {
     const [input, setInput] = useState({
@@ -30,7 +31,7 @@ const CreateArea = (props) => {
             <form>
                 <input name="title" placeholder="Title" onChange={inputChangeHandler} value={input.title} autoComplete="off"/>
                 <textarea name="content" placeholder="Take a note..." onChange={inputChangeHandler}  value={input.content} rows="3"/>
-                <button onClick={submissionHandler} disabled={input.title.length<1}>+</button>
+                <button onClick={submissionHandler} disabled={input.title.length<1}><AddIcon/></button>
             </form>
         </div>
     )
