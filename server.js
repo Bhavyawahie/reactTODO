@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 const cors = require('cors')
 const app = express();
 
-mongoose.connect("mongodb://localhost:27017/reactTodoDB", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
+mongoose.connect("mongodb+srv://bhavyawahie:Dl8c@c1978@cluster0.khotx.mongodb.net/reactTodoDB?retryWrites=true/reactTodoDB", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
 
 const noteSchema = new mongoose.Schema({
     id: String,
