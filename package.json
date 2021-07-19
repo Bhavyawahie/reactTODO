@@ -18,6 +18,9 @@
   },
   "keywords": [],
   "author": "",
+  "engines": {
+    "node": "14.15.5"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Bhavyawahie/reactTODO/issues"
