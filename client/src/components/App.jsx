@@ -36,7 +36,7 @@ const App = () => {
         <Header/>
         <CreateArea onSubmit={noteInit}/>
         {
-            notes.map((note, indexnp) => {
+            notes.map((note) => {
             return( 
                 <Note
                     key={note.id}
