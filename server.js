@@ -1,8 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const { v4: uuidv4 } = require('uuid');
-const cors = require('cors')
+const cors = require('cors');
+const path = require("path")
 const app = express();
+const PORT = process.env.PORT || 4000;
 
 mongoose.connect("mongodb+srv://bhavyawahie:Dl8c@c1978@cluster0.khotx.mongodb.net/reactTodoDB?retryWrites=true/reactTodoDB", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
 
@@ -28,7 +30,12 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(cors());
 
-
+if(process.env.NODE_ENV === "production" ){
+    app.use(express.static("client/build"))
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
+    })
+}
 
 
     app.get("/notes",(req, res) => {
@@ -77,7 +84,7 @@ app.use(cors());
     }
     });
 
-app.listen(4000, () => {
+app.listen(PORT, () => {
     console.log("Server started at http://localhost:4000")
 });
 //epiphany
