@@ -6,6 +6,7 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
+    "assert": "^2.0.0",
     "axios": "^0.21.1",
     "chokidar": "^3.5.2",
     "ejs": "^3.1.6",

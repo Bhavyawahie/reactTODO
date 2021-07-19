@@ -36,10 +36,10 @@ const App = () => {
         <Header/>
         <CreateArea onSubmit={noteInit}/>
         {
-            notes.map((note, index) => {
+            notes.map((note, indexnp) => {
             return( 
                 <Note
-                    key={index}
+                    key={note.id}
                     id={note.id} 
                     title={note.title} 
                     content={note.content}
