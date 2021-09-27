@@ -4,9 +4,12 @@ const { v4: uuidv4 } = require('uuid');
 const cors = require('cors');
 const path = require("path")
 const app = express();
+const dotenv = require('dotenv');
 const PORT = process.env.PORT || 4000;
 
-mongoose.connect("mongodb+srv://bhavyawahie:Dl8c@c1978@cluster0.khotx.mongodb.net/reactTodoDB?retryWrites=true/reactTodoDB", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
+dotenv.config({ path: './.env'})
+
+mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
 
 const noteSchema = new mongoose.Schema({
     id: String,
