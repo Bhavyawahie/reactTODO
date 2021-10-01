@@ -3,6 +3,7 @@ import axios from "axios";
 // import AddIcon from "@material-ui/icons/Add"
 
 const CreateArea = (props) => {
+    const [isExpanded, setIsExpanded] = useState(false)
     const [input, setInput] = useState({
         title: "",
         content: ""
@@ -26,11 +27,17 @@ const CreateArea = (props) => {
         //console.log("I was clicked and form is supposed to be submitted");
     }
 
+    const expandTextField = () => {
+        setIsExpanded(true)
+    }
+
     return (
         <div>
             <form>
-                <input name="title" placeholder="Title" onChange={inputChangeHandler} value={input.title} autoComplete="off"/>
-                <textarea name="content" placeholder="Take a note..." onChange={inputChangeHandler}  value={input.content} rows="3"/>
+                {isExpanded && (
+                    <input name="title" placeholder="Title" onChange={inputChangeHandler} value={input.title} autoComplete="off"/>
+                )}
+                <textarea name="content" placeholder="Take a note..." onChange={inputChangeHandler} onClick={expandTextField}  value={input.content} rows={isExpanded ? 3 : 1}/>
                 <button onClick={submissionHandler} disabled={input.title.length<1}>+</button>
             </form>
         </div>
