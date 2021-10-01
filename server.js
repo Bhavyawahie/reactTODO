@@ -1,33 +1,25 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const { v4: uuidv4 } = require('uuid');
-const cors = require('cors');
+const express = require('express')
+const mongoose = require('mongoose')
+const cors = require('cors')
 const path = require("path")
-const app = express();
-const dotenv = require('dotenv');
-const PORT = process.env.PORT || 4000;
+const app = express()
+const dotenv = require('dotenv')
+const colors = require('colors')
+const morgan = require('morgan')
+
+
+const connectDb = require('./config/db')
+const noteRoutes = require('./routes/noteRoutes')
+
 
 dotenv.config({ path: './.env'})
 
-mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
 
-const noteSchema = new mongoose.Schema({
-    id: String,
-    title: {
-        type: String,
-        required: [true, "Title is required to create a new note!"]
-    },
-    content: String
-});
+connectDb()
 
-const Note = mongoose.model("Note", noteSchema);
-
-// const testNote = new Note({
-//     id: uuidv4(),
-//     title:"my todo list",
-//     content:"This is the content of my list"
-// });
-// testNote.save();
+if(process.env.NODE_ENV === 'development'){
+    app.use(morgan('dev'))
+}
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
@@ -40,55 +32,18 @@ if(process.env.NODE_ENV === "production" ){
     })
 }
 
+app.use(noteRoutes)
 
-    app.get("/notes",(req, res) => {
-        Note.find({}, (err, foundNotes) => {
-            if(!err){
-                res.status(200).json(foundNotes);
-                //export 
-            }
-            else{
-                console.error(err);
-            }
-        });
-    })
-
-    app.post("/notes/:id", (req, res) => {
-        const newNote = Note({
-            id: uuidv4(),
-            title: req.body.title,
-            content: req.body.content
-        });
-        newNote.save((err) => {
-            if(err){
-                console.error(err);
-            }
-            else{
-                res.send("Note added successfully!");
-            }
-        });
-
-    })
-
-    app.delete("/notes/:id", async (req, res) => {
-        const id = req.params.id
-        try {
-            await Note.findOneAndRemove( {id: id}, (err) => {
-            if(err){
-                console.error(err);
-            }
-            else{
-                res.send("Article Deleted Successfully!");
-            }
-        });
-    }
-    catch(err){
-        if (err) throw err;
-    }
-    });
+const PORT = process.env.PORT || 4000
 
 app.listen(PORT, () => {
-    console.log("Server started at http://localhost:4000")
+    console.log("Server started at http://localhost:4000".yellow.inverse)
 });
-//epiphany
+
+// const testNote = new Note({
+//     id: uuidv4(),
+//     title:"my todo list",
+//     content:"This is the content of my list"
+// });
+// testNote.save();
 
