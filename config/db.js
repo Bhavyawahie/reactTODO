@@ -6,7 +6,7 @@ const connectDb = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true,
-            useFindAndModify: true
+            useFindAndModify: false
         })
         console.log(`MongoDB server connected: ${connection.connection.host}`.green.inverse)
     } catch (error) {
