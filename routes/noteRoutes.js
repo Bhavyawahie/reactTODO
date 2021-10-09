@@ -1,18 +1,9 @@
 const express = require('express');
-const Note = require('../models/noteModel');
 const router = express.Router()
-const {v4: uuidv4} = require('uuid')
+const getNotes = require('../controllers/notesController')
 
-router.get("/notes",(req, res) => {
-    Note.find({}, (err, foundNotes) => {
-        if(!err){
-            res.status(200).json(foundNotes);
-        }
-        else{
-            console.error(err);
-        }
-    })
-})
+
+router.get("/notes", getNotes)
 
 router.post("/notes/:id", (req, res) => {
     const newNote = Note({
