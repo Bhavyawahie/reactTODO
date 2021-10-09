@@ -31,7 +31,7 @@ if(process.env.NODE_ENV === "production" ){
     })
 }
 
-app.use(noteRoutes)
+app.use("/api/notes", noteRoutes)
 
 const PORT = process.env.PORT || 4000
 
