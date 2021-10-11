@@ -9,6 +9,7 @@ const morgan = require('morgan')
 
 const connectDb = require('./config/db')
 const noteRoutes = require('./routes/noteRoutes')
+const { notFound, errorHandler } = require('./middlewares/errorMiddleware')
 
 
 dotenv.config({ path: './.env'})
@@ -32,6 +33,8 @@ if(process.env.NODE_ENV === "production" ){
 }
 
 app.use("/api/notes", noteRoutes)
+app.use(notFound)
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 4000
 
