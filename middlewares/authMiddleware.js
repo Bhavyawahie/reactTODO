@@ -8,11 +8,12 @@ const protect = asyncHandler(async (req, res, next) => {
         try {
             token = req.headers.authorization.split(' ')[1]
             const decodedToken = jwt.verify(token, process.env.JWT_SECRET) // token returns the associated user's _id
-            req.user = await User.findById(decodedToken).select(-password) //@ts-expect-error
+            req.user = await User.findById(decodedToken.id).select('-password') //@ts-expect-error
             next()
         } catch (error) {
+            console.error(error)
             res.status(401)
-            throw new Error('Not authorized, token is invalid!')
+            throw new Error('Not authorized, Token is invalid')
         }
     }
     if(!token) {
