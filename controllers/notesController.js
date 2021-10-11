@@ -30,7 +30,7 @@ const addNotes = asyncHandler(async (req, res) => {
 // @access: Private
 
 const deleteNotes = asyncHandler(async (req, res) => {
-    const note = await Note.find({id: req.params.id})
+    const note = await Note.findOne({id: req.params.id})
     if(note) {
         await Note.findOneAndRemove({id: req.params.id})
         res.json('Note removed successfully!')
