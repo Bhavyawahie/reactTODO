@@ -9,6 +9,7 @@ const morgan = require('morgan')
 
 const connectDb = require('./config/db')
 const noteRoutes = require('./routes/noteRoutes')
+const userRoutes = require('./routes/userRoutes')
 const { notFound, errorHandler } = require('./middlewares/errorMiddleware')
 
 
@@ -33,6 +34,7 @@ if(process.env.NODE_ENV === "production" ){
 }
 
 app.use("/api/notes", noteRoutes)
+app.use("/api/users", userRoutes)
 app.use(notFound)
 app.use(errorHandler)
 
