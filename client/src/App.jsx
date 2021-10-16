@@ -1,12 +1,10 @@
 import React, { useEffect ,useState} from "react"
-import axios from "axios"
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Header from "./components/Header"
-import CreateArea from "./components/CreateArea"
-import Note from "./components/Note"
 import Footer from "./components/Footer"
 import registerScreen from "./screens/registerScreen"
 import loginScreen from "./screens/loginScreen"
+import notesScreen from "./screens/notesScreen"
 
 
 const App = () => {
@@ -14,7 +12,7 @@ const App = () => {
         <Router>
             <Header/>
             <main>
-                <Route path="/note" exact component={CreateArea} />
+                <Route path="/note" exact component={notesScreen} />
                 <Route path="/login"  component={loginScreen} />
                 <Route path="/register" exact component={registerScreen} />
             </main>
