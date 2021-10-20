@@ -6,21 +6,25 @@
 
 html {
   font-family: "Montserrat", sans-serif;
+  overflow: hidden;
 }
 
 header {
-  background-color: #f5ba13;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
   margin: auto -16px;
   padding: 16px 32px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
-  color: #fff;
+  color: rgb(90, 90, 81);
   font-family: "McLaren", cursive;
   font-weight: 200;
   padding-left: 2%;
 }
+
 
 footer {
   position: absolute;
@@ -67,7 +71,7 @@ footer p {
   background-color: #fff;
   outline: none;
 }
-form {
+.note-form {
   position: relative;
   width: 480px;
   margin: 30px auto 20px auto;
@@ -76,8 +80,8 @@ form {
   border-radius: 7px;
   box-shadow: 0 1px 5px rgb(138, 137, 137);
 }
-form input,
-form textarea {
+.note-form-title,
+.note-form-body {
   width: 100%;
   border: none;
   padding: 4px;
@@ -86,7 +90,7 @@ form textarea {
   font-family: inherit;
   resize: none;
 }
-form button {
+.note-form-submit {
   position: absolute;
   right: 18px;
   bottom: -18px;
