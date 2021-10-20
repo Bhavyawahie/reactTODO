@@ -18,12 +18,12 @@ const CreateArea = (props) => {
         });
     }
     const submissionHandler = (event) => {
+        event.preventDefault()
         props.onSubmit(input);
         setInput({
             title: "",
             content: ""
         });
-        event.preventDefault();
         //console.log("I was clicked and form is supposed to be submitted");
     }
 
