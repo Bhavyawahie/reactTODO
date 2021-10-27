@@ -22,7 +22,7 @@ const Header = () => {
                         <AppsIcon className='app-icon'/>
                     </IconButton>
                     <IconButton onClick={logoutHandler}>
-                        <Avatar>B</Avatar>
+                        <Avatar>{userInfo.name.charAt(0)}</Avatar>
                     </IconButton>
                 </div>
             ) : (
