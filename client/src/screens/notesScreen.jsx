@@ -1,43 +1,58 @@
 import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { createNote, listNotes } from '../actions/noteActions';
+import { createNote, deleteNote, listNotes } from '../actions/noteActions';
 import { Box } from '@material-ui/core';
 import CreateArea from '../components/CreateArea'
 import Note from '../components/Note'
 import Loader from '../components/Loader';
+import { NOTE_CREATE_RESET } from '../constants/noteConstants';
 
 const notesScreen = ({history}) => {
     const dispatch = useDispatch()
     const noteList = useSelector(state => state.noteList)
     const {loading, notes, error} = noteList
+    const noteCreate = useSelector(state => state.noteCreate)
+    const {success: successCreate} = noteCreate
+    const noteDelete = useSelector(state => state.noteDelete)
+    const {success : successDelete} = noteDelete
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
+    
     useEffect(() => {
-        if(userInfo){
+        if(userInfo) {
+            dispatch({type: NOTE_CREATE_RESET})
             dispatch(listNotes())
         }
         else {
             history.push('/login')
         }
-    }, [dispatch, history, userInfo])
+    }, [dispatch, history, userInfo, successCreate, successDelete ])
 
-    const noteCreate = (input) => {
+
+    const noteCreateHandler = (input) => {
         dispatch(createNote(input))
     }
+
+    const noteDeleteHandler = (id) => {
+        dispatch(deleteNote(id))
+    }
+
     return (
         <div>
-            <CreateArea onSubmit={noteCreate}/>
+            <CreateArea onSubmit={noteCreateHandler}/>
             <Box>
-            {   loading ? <Loader/> : (
+            {   
                 notes.map((note) => {
                 return( 
                     <Note
                         key={note.id}
                         id={note.id} 
                         title={note.title} 
-                        content={note.content}/> 
+                        content={note.content}
+                        onDelClick={noteDeleteHandler}    
+                        /> 
                     )
-                }))
+                })
             }
             </Box>
         </div>
