@@ -23,7 +23,7 @@ const addNotes = asyncHandler(async (req, res) => {
         content: req.body.content
     })
     await note.save()
-    res.status(201).json('Note added successfully!')
+    res.status(201).json(note)
 })
 
 // @desc:   Delete notes from the user's collection of notes
