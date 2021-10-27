@@ -1,10 +1,11 @@
-import { NOTE_CREATE_FAIL, NOTE_CREATE_REQUEST, NOTE_CREATE_SUCCESS, NOTE_DELETE_FAIL, NOTE_DELETE_REQUEST, NOTE_DELETE_SUCCESS, NOTE_LIST_FAIL, NOTE_LIST_REQUEST, NOTE_LIST_SUCCESS } from "../constants/noteConstants";
+import { NOTE_CREATE_FAIL, NOTE_CREATE_REQUEST, NOTE_CREATE_RESET, NOTE_CREATE_SUCCESS, NOTE_DELETE_FAIL, NOTE_DELETE_REQUEST, NOTE_DELETE_SUCCESS, NOTE_LIST_FAIL, NOTE_LIST_REQUEST, NOTE_LIST_RESET, NOTE_LIST_SUCCESS } from "../constants/noteConstants";
 
-export const noteListReducer = (state = { notes: []}, action) => {
+export const noteListReducer = (state = { notes: [] }, action) => {
     switch (action.type) {
         case NOTE_LIST_REQUEST:
             return {
-                loading: true
+                loading: true, 
+                notes: []
             }
         case NOTE_LIST_SUCCESS: 
             return {
@@ -16,6 +17,8 @@ export const noteListReducer = (state = { notes: []}, action) => {
                 loading: false,
                 error: action.payload
             }
+        case NOTE_LIST_RESET: 
+            return {}    
         default:
             return state
     }
@@ -37,8 +40,10 @@ export const noteCreateReducer = (state = {}, action) => {
                 loading: false,
                 error: action.payload
             }
+        case NOTE_CREATE_RESET:
+            return {}    
         default: 
-            return { state }            
+            return state           
     }
 }
 
@@ -59,6 +64,6 @@ export const noteDeleteReducer = (state = {}, action) => {
                 error: action.payload
             }       
         default: 
-            return {state}
+            return state
     }
 }
