@@ -6,8 +6,9 @@ import CreateArea from '../components/CreateArea'
 import Note from '../components/Note'
 import Loader from '../components/Loader';
 import { NOTE_CREATE_RESET } from '../constants/noteConstants';
+import Header from '../components/Header';
 
-const notesScreen = ({history}) => {
+const notesScreen = ({history, location}) => {
     const dispatch = useDispatch()
     const noteList = useSelector(state => state.noteList)
     const {loading, notes, error} = noteList
@@ -24,7 +25,7 @@ const notesScreen = ({history}) => {
             dispatch(listNotes())
         }
         else {
-            history.push('/login')
+            history.push('/')
         }
     }, [dispatch, history, userInfo, successCreate, successDelete ])
 
@@ -38,24 +39,27 @@ const notesScreen = ({history}) => {
     }
 
     return (
-        <div>
-            <CreateArea onSubmit={noteCreateHandler}/>
-            <Box>
-            {   
-                notes.map((note) => {
-                return( 
-                    <Note
-                        key={note.id}
-                        id={note.id} 
-                        title={note.title} 
-                        content={note.content}
-                        onDelClick={noteDeleteHandler}    
-                        /> 
-                    )
-                })
-            }
-            </Box>
-        </div>
+        <>
+            <Header location={location}/>
+            <div>
+                <CreateArea onSubmit={noteCreateHandler}/>
+                <Box>
+                {   
+                    notes.map((note) => {
+                    return( 
+                        <Note
+                            key={note.id}
+                            id={note.id} 
+                            title={note.title} 
+                            content={note.content}
+                            onDelClick={noteDeleteHandler}    
+                            /> 
+                        )
+                    })
+                }
+                </Box>
+            </div>
+        </>    
     )
 }
 

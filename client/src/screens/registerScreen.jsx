@@ -1,10 +1,14 @@
 import React from 'react'
+import Header from '../components/Header'
 
-const registerScreen = () => {
+const registerScreen = ({location}) => {
     return (
-        <div>
-            register here
-        </div>
+        <>
+            <Header location={location}/>
+            <div>
+                register here
+            </div>
+        </>
     )
 }
 
