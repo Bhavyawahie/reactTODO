@@ -1,4 +1,4 @@
-import React, { useEffect ,useState} from "react"
+import React from "react"
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Header from "./components/Header"
 import Footer from "./components/Footer"
@@ -10,10 +10,9 @@ import notesScreen from "./screens/notesScreen"
 const App = () => {
     return (
         <Router>
-            <Header/>
             <main>
                 <Route path="/note" exact component={notesScreen} />
-                <Route path="/login"  component={loginScreen} />
+                <Route path="/" exact component={loginScreen} />
                 <Route path="/register" exact component={registerScreen} />
             </main>
             <Footer/>

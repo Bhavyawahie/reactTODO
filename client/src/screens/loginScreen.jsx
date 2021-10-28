@@ -6,7 +6,9 @@ import {
     Container,
     Input,
 } from '@material-ui/core'
+import Loader from '../components/Loader'
 import { login } from '../actions/userActions'
+import Header from '../components/Header'
 
 
 const loginScreen = ({history, location}) => {
@@ -30,28 +32,32 @@ const loginScreen = ({history, location}) => {
 
 
     return (
-        <Card>
-            <Container maxWidth="sm">
-                <form>
-                    <Input placeholder='email' type="email"
-                        name={email}
-                        value={email}
-                        onChange={
-                            (e) => setEmail(e.target.value)
-                        }/>
-                    <br/>
-                    <Input placeholder='password' type='password'
-                        name={password}
-                        value={password}
-                        onChange={
-                            (e) => setPassword(e.target.value)
-                        }/>
-                    <br/>
-                    <Button variant='contained' color='primary'
-                        onClick={submitHandler}>Log In</Button>
-                </form>
-            </Container>
-        </Card>
+        <>
+            <Header location={location}/>
+            <Card> 
+                {loading && <Loader/>}
+                <Container maxWidth="sm">
+                    <form>
+                        <Input placeholder='email' type="email"
+                            name={email}
+                            value={email}
+                            onChange={
+                                (e) => setEmail(e.target.value)
+                            }/>
+                        <br/>
+                        <Input placeholder='password' type='password'
+                            name={password}
+                            value={password}
+                            onChange={
+                                (e) => setPassword(e.target.value)
+                            }/>
+                        <br/>
+                        <Button variant='contained' color='primary'
+                            onClick={submitHandler}>Log In</Button>
+                    </form>
+                </Container>
+            </Card>
+        </>    
     )
 }
 

@@ -5,12 +5,12 @@ import AppsIcon from '@material-ui/icons/Apps'
 import IconButton from "@material-ui/core/IconButton";
 import {Avatar, Button} from "@material-ui/core";
 
-const Header = () => {
+const Header = ({location}) => {
     const dispatch = useDispatch()
     const userLogin = useSelector(state => state.userLogin)
     const {userInfo} = userLogin
     const logoutHandler = () => {
-        console.log('i was clicked')
+        console.log(location)
     }
     return (
         <header>
@@ -27,8 +27,8 @@ const Header = () => {
                 </div>
             ) : (
                 <div>
-                    <Link to='/register'>
-                        <Button variant='contained' color='primary'>Sign Up</Button>
+                    <Link to={location.pathname === '/' ? '/register' : '/' }>
+                        <Button variant='contained' color='primary'>{location.pathname === '/' ? `Sign up` : `Log in` }</Button>
 
                     </Link>
                 </div>
