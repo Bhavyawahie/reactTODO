@@ -20,12 +20,12 @@ const notesScreen = ({history, location}) => {
     const { userInfo } = userLogin
     
     useEffect(() => {
-        if(userInfo) {
-            dispatch({type: NOTE_CREATE_RESET})
-            dispatch(listNotes())
+        if(!userInfo) {
+            history.push('/')
         }
         else {
-            history.push('/')
+            dispatch({type: NOTE_CREATE_RESET})
+            dispatch(listNotes())
         }
     }, [dispatch, history, userInfo, successCreate, successDelete ])
 
@@ -41,10 +41,10 @@ const notesScreen = ({history, location}) => {
     return (
         <>
             <Header location={location}/>
-            <div>
+            {userInfo && (<div>
                 <CreateArea onSubmit={noteCreateHandler}/>
                 <Box>
-                {   
+                {   loading ? <Loader/> : (
                     notes.map((note) => {
                     return( 
                         <Note
@@ -56,9 +56,11 @@ const notesScreen = ({history, location}) => {
                             /> 
                         )
                     })
+                )
                 }
                 </Box>
-            </div>
+            </div>)
+            }
         </>    
     )
 }
