@@ -1,12 +1,13 @@
 import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { createNote, deleteNote, listNotes } from '../actions/noteActions';
 import { Box } from '@material-ui/core';
 import CreateArea from '../components/CreateArea'
-import Note from '../components/Note'
-import Loader from '../components/Loader';
-import { NOTE_CREATE_RESET } from '../constants/noteConstants';
+import Error from '../components/Error';
 import Header from '../components/Header';
+import Loader from '../components/Loader';
+import Note from '../components/Note'
+import { NOTE_CREATE_RESET } from '../constants/noteConstants';
+import { createNote, deleteNote, listNotes } from '../actions/noteActions';
 
 const notesScreen = ({history, location}) => {
     const dispatch = useDispatch()
@@ -44,7 +45,7 @@ const notesScreen = ({history, location}) => {
             {userInfo && (<div>
                 <CreateArea onSubmit={noteCreateHandler}/>
                 <Box>
-                {   loading ? <Loader/> : (
+                {   loading ? <Loader/> : error ? <Error error={error}/> : (
                     notes.map((note) => {
                     return( 
                         <Note

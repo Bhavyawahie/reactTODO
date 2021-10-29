@@ -7,6 +7,7 @@ import {
     Input,
 } from '@material-ui/core'
 import Loader from '../components/Loader'
+import Error from '../components/Error'
 import { login } from '../actions/userActions'
 import Header from '../components/Header'
 
@@ -35,6 +36,7 @@ const loginScreen = ({history, location}) => {
         <>
             <Header location={location}/>
             <Card> 
+                {error && <Error error={error}/>}
                 {loading && <Loader/>}
                 <Container maxWidth="sm">
                     <form>
