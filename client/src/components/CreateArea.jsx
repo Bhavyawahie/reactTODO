@@ -23,7 +23,6 @@ const CreateArea = (props) => {
             title: "",
             content: ""
         });
-        //console.log("I was clicked and form is supposed to be submitted");
     }
 
     const expandTextField = () => {

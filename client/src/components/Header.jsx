@@ -38,7 +38,7 @@ const Header = ({location}) => {
                     </Tooltip>
                     <Tooltip title='Account'>
                         <IconButton onClick={handleClick} size='small'>
-                            <Avatar>{userInfo.name.charAt(0)}</Avatar>
+                            <Avatar>{userInfo.name.charAt(0).toUpperCase()}</Avatar>
                         </IconButton>
                     </Tooltip>
                     <Menu
@@ -78,7 +78,7 @@ const Header = ({location}) => {
                         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                     >
                         <MenuItem>
-                            <Avatar>{userInfo.name.charAt(0)}</Avatar>
+                            <Avatar>{userInfo.name.charAt(0).toUpperCase()}</Avatar>
                             {`Hello, ${userInfo.name}!`}
                         </MenuItem>
                         <Divider />                        
