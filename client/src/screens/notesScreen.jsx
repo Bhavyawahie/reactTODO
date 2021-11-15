@@ -42,10 +42,12 @@ const notesScreen = ({history, location}) => {
     return (
         <>
             <Header location={location}/>
-            {userInfo && (<div>
+                {error && <Error error={error}/>}
+            {userInfo && notes && (<div>
                 <CreateArea onSubmit={noteCreateHandler}/>
+                {loading && <Loader/>}
                 <Box>
-                {   loading ? <Loader/> : error ? <Error error={error}/> : (
+                {   
                     notes.map((note) => {
                     return( 
                         <Note
@@ -57,7 +59,6 @@ const notesScreen = ({history, location}) => {
                             /> 
                         )
                     })
-                )
                 }
                 </Box>
             </div>)
