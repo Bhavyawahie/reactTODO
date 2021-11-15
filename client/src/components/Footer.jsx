@@ -5,7 +5,7 @@ const currentYear = dateObj.getFullYear();
 
 const Footer = () => {
     return <footer>
-    <p>Copyright {currentYear}</p>
+    <p>© Copyright {currentYear}</p>
     </footer>
 }
 export default Footer    
