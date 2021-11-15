@@ -1,11 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-    Button,
-    Card,
-    Container,
-    Input,
-} from '@material-ui/core'
+import { Button, Card, Container, TextField } from '@material-ui/core'
 import Loader from '../components/Loader'
 import Error from '../components/Error'
 import { login } from '../actions/userActions'
@@ -19,6 +14,7 @@ const loginScreen = ({history, location}) => {
     const userLogin = useSelector(state => state.userLogin)
     const {loading, error, userInfo} = userLogin
     const redirect = location.seach ? location.search.split('=')[1] : '/note'
+    const btnStyle = { margin: '10% 0' }
     
     useEffect(() => {
         if(userInfo) {
@@ -35,27 +31,30 @@ const loginScreen = ({history, location}) => {
     return (
         <>
             <Header location={location}/>
-            <Card> 
-                {error && <Error error={error}/>}
-                {loading && <Loader/>}
+            {error && <Error error={error}/>}
+            {loading && <Loader/>}
+            <Card className='login-card'> 
                 <Container maxWidth="sm">
+                    <h2>Login to Keeper</h2>
+                    <br />
                     <form>
-                        <Input placeholder='email' type="email"
+                        <TextField label='Email' placeholder='Enter email' type="email"
                             name={email}
                             value={email}
                             onChange={
                                 (e) => setEmail(e.target.value)
-                            }/>
-                        <br/>
-                        <Input placeholder='password' type='password'
+                            }
+                            fullWidth required    
+                            />
+                        <TextField label='Password' placeholder='Enter password' type='password'
                             name={password}
                             value={password}
                             onChange={
                                 (e) => setPassword(e.target.value)
-                            }/>
-                        <br/>
-                        <Button variant='contained' color='primary'
-                            onClick={submitHandler}>Log In</Button>
+                            }
+                            fullWidth required    
+                            />
+                        <Button style={btnStyle} type='submit' variant='contained' color='primary' onClick={submitHandler} fullWidth>Log In</Button>
                     </form>
                 </Container>
             </Card>

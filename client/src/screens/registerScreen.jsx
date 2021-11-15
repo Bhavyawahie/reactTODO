@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import Alert from '@material-ui/lab/Alert'
-import { Card, Container, Input, Button } from '@material-ui/core'
+import { Button, Card, Container, TextField } from '@material-ui/core'
 import Error from '../components/Error'
 import Header from '../components/Header'
 import Loader from '../components/Loader'
@@ -16,6 +16,7 @@ const registerScreen = ({history, location}) => {
     const dispatch = useDispatch()
     const userRegister = useSelector(state => state.userRegister)
     const {loading, error, userInfo} = userRegister
+    const btnStyles = {margin: '10% auto'}
     const redirect = location.search ? location.search.split('=')[1] : '/note'
     
     useEffect(() => {
@@ -36,42 +37,38 @@ const registerScreen = ({history, location}) => {
     return (
         <>
             <Header location={location}/>
-            <Card> 
-                {validationError && <Alert severity='warning'>{validationError}</Alert>}
-                {error && <Error error={error}/>}
-                {loading && <Loader/>}
+            {error && <Error error={error}/>}
+            {validationError && <Alert severity='warning'>{validationError}</Alert>}
+            {loading && <Loader/>}
+            <Card className='register-card'> 
                 <Container maxWidth="sm">
+                <h2>Sign Up with Keeper</h2>
                     <form>
-                        <Input placeholder='Name' type="name"
+                        <TextField placeholder='Enter your Name' label='Name' type="name"
                             name={name}
                             value={name}
-                            onChange={
-                                (e) => setName(e.target.value)
-                            }/>
-                        <br/>
-                        <Input placeholder='Email' type="email"
+                            onChange={(e) => setName(e.target.value)}
+                            fullWidth required
+                            />
+                        <TextField placeholder='example@xyz.com' label='Email' type="email"
                             name={email}
                             value={email}
-                            onChange={
-                                (e) => setEmail(e.target.value)
-                            }/>
-                        <br/>
-                        <Input placeholder='Password' type='password'
+                            onChange={(e) => setEmail(e.target.value)}
+                            fullWidth required    
+                            />
+                        <TextField placeholder='Create a Password' label='Password' type='password'
                             name={password}
                             value={password}
-                            onChange={
-                                (e) => setPassword(e.target.value)
-                            }/>
-                        <br/>
-                        <Input placeholder='Confirm Password' type='password'
+                            onChange={(e) => setPassword(e.target.value)}
+                            fullWidth required
+                            />
+                        <TextField placeholder='Confirm the entered Password' label='Confirm Password' type='password'
                             name={confirmPassword}
                             value={confirmPassword}
-                            onChange={
-                                (e) => setConfirmPassword(e.target.value)
-                            }/>
-                        <br/>
-                        <Button variant='contained' color='primary'
-                            onClick={submitHandler}>Create Account</Button>
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            fullWidth required
+                            />
+                        <Button style={btnStyles} variant='contained' color='primary' onClick={submitHandler} fullWidth>Create Account</Button>
                     </form>
                 </Container>
             </Card>
