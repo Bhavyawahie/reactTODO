@@ -36,7 +36,7 @@ const CreateArea = (props) => {
                     <input name="title" placeholder="Title" onChange={inputChangeHandler} value={input.title} autoComplete="off" className='note-form-title'/>
                 )}
                 <textarea name="content" placeholder="Take a note..." onChange={inputChangeHandler} onClick={expandTextField}  value={input.content} rows={isExpanded ? 3 : 1} className='note-form-body'/>
-                <button onClick={submissionHandler} disabled={input.title.length<1} className='note-form-submission'><AddIcon/></button>
+                <button onClick={submissionHandler} disabled={input.content.length<1} className='note-form-submission'><AddIcon/></button>
             </form>
         </div>
     )

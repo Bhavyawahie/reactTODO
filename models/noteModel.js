@@ -9,7 +9,6 @@ const noteSchema = new mongoose.Schema({
     } ,
     title: {
         type: String,
-        required: [true, "Title is required to create a new note!"]
     },
     content: String
 });
