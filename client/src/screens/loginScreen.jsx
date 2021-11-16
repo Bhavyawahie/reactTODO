@@ -32,7 +32,7 @@ const loginScreen = ({history, location}) => {
         <>
             <Header location={location}/>
             {error && <Error error={error}/>}
-            {loading && <Loader/>}
+            {loading && <Loader className='loader'/>}
             <Card className='login-card'> 
                 <Container maxWidth="sm">
                     <h2>Login to Keeper</h2>

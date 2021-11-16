@@ -4,8 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import AppsIcon from '@material-ui/icons/Apps'
 import ExitToApp from '@material-ui/icons/ExitToApp'
 import IconButton from "@material-ui/core/IconButton";
-import {Avatar, Button, Divider, ListItemIcon, Menu, MenuItem, Tooltip} from "@material-ui/core";
-import { USER_LOGOUT } from "../constants/userConstants"
+import {Avatar, Button,  Grid,  Menu, MenuItem, Tooltip} from "@material-ui/core";
 import { logout } from "../actions/userActions"
 
 const Header = ({location}) => {
@@ -14,7 +13,13 @@ const Header = ({location}) => {
     const dispatch = useDispatch()
     const userLogin = useSelector(state => state.userLogin)
     const {userInfo} = userLogin
-
+    if(userInfo) {
+        let fName = userInfo.name.split(' ')[0]
+        let lName = userInfo.name.split(' ')[1]
+        fName = fName.charAt(0).toUpperCase() + fName.slice(1)
+        lName = lName.charAt(0).toUpperCase() + lName.slice(1)
+        var userName = fName + ' ' + lName
+    }
     const handleClick = ({currentTarget}) => {
         setAnchorEl(currentTarget)
     }
@@ -46,48 +51,34 @@ const Header = ({location}) => {
                         open={open}
                         onClose={handleClose}
                         onClick={handleClose}
-                        PaperProps={{
-                        elevation: 10,
-                        sx: {
-                            overflow: 'visible',
-                            filter: 'drop-shadow(0px 2px 100px rgba(0,0,0,1))',
-                            mt: 2.5,
-                            '& .MuiAvatar-root': {
-                            width: 32,
-                            height: 32,
-                            ml: -0.5,
-                            mr: 0.5,
-                            },
-                            '&:before': {
-                            content: '""',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            position: 'absolute',
-                            top: 0,
-                            right: 14,
-                            width: 10,
-                            height: 10,
-                            bgcolor: 'background.paper',
-                            transform: 'translateY(-50%) rotate(45deg)',
-                            zIndex: 0,
-                            },
-                        },
-                        }}
                         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                    >
+                        PaperProps={{  
+                                    style: {  
+                                        width: 360,  
+                                        height: 230, 
+                                        boxShadow: '1px 1px 10px 2px #f0f0f0',
+                                        borderRadius: '5px',
+                                    },  
+                                }}>
                         <MenuItem>
-                            <Avatar>{userInfo.name.charAt(0).toUpperCase()}</Avatar>
-                            {`Hello, ${userInfo.name}!`}
+                            <Grid container justifyContent='center'> 
+                                <Grid  container justifyContent='center'>
+                                    <Avatar alt='User Avatar' style={{height: '70px', width: '70px', margin: '10px auto', fontSize: '32px'}}>{userInfo.name.charAt(0).toUpperCase()}</Avatar>
+                                </Grid>
+                                <Grid container>
+                                    <Grid container justifyContent='center'>
+                                        {`${userName}`}
+                                    </Grid>
+                                    <Grid container justifyContent='center' style={{color: "#5F6368", fontSize: '13px'}}>
+                                        {`${userInfo.email}`}
+                                    </Grid>
+                                </Grid>
+                            </Grid>
                         </MenuItem>
-                        <Divider />                        
-                        <MenuItem onClick={logoutHandler}>
-                        <ListItemIcon>
-                            <ExitToApp fontSize="small" />
-                        </ListItemIcon>
-                        Logout
-                        </MenuItem>
+                            <Grid justifyContent='center' style={{marginTop: '10px'}}>
+                                <Button variant='outlined' startIcon={<ExitToApp fontSize="small" />} onClick={logoutHandler}>Logout</Button>
+                            </Grid>
                     </Menu>
                 </div>
             ) : (
