@@ -8,6 +8,12 @@ html {
   font-family: "Montserrat", sans-serif;
 }
 
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 header {
   display: flex;
   justify-content: space-between;
@@ -26,9 +32,8 @@ header h1 {
 
 
 footer {
-  position: absolute;
+  margin-top: auto;
   text-align: center;
-  bottom: 0;
   width: 100%;
   height: 2.5rem;
 }
@@ -37,14 +42,24 @@ footer p {
   color: #ccc;
 }
 
+.MuiGrid-root {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-left: 4%;
+  margin-right: 4%;
+  padding: 0 1%;
+}
+
+
 .note {
   background: #fff;
+  border: 1px solid rgba(167, 167, 167, 0.329);
   border-radius: 7px;
-  box-shadow: 0 2px 5px #ccc;
   padding: 10px;
-  width: 240px;
+  width: 17.6%;
   margin: 16px;
-  float: left;
 }
 
 .note h1 {
@@ -70,14 +85,15 @@ footer p {
   background-color: #fff;
   outline: none;
 }
+
 .note-form {
   position: relative;
   width: 480px;
-  margin: 30px auto 20px auto;
+  margin: 30px auto 30px auto;
   background: #fff;
   padding: 15px;
   border-radius: 7px;
-  box-shadow: 0 1px 5px rgb(138, 137, 137);
+  box-shadow: 0 1px 5px rgba(138, 137, 137, 0.479);
 }
 .note-form-title,
 .note-form-body {
@@ -89,7 +105,7 @@ footer p {
   font-family: inherit;
   resize: none;
 }
-.note-form-submit {
+.note-form-submission {
   position: absolute;
   right: 18px;
   bottom: -18px;
@@ -103,3 +119,22 @@ footer p {
   cursor: pointer;
   outline: none;
 }
+
+.login-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 40vh;
+  width: 334px;
+  margin: 20px auto;
+}
+
+.register-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 50vh;
+  width: 334px;
+  margin: 20px auto;
+}
+
