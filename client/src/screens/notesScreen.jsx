@@ -45,7 +45,7 @@ const notesScreen = ({history, location}) => {
                 {error && <Error error={error}/>}
             {userInfo && notes && (<div>
                 <CreateArea onSubmit={noteCreateHandler}/>
-                {loading && <Loader/>}
+                {loading ? <Loader/> : (
                 <Grid>
                 {   
                     notes.map((note) => {
@@ -60,7 +60,7 @@ const notesScreen = ({history, location}) => {
                         )
                     })
                 }
-                </Grid>
+                </Grid>)}
             </div>)
             }
         </>    
