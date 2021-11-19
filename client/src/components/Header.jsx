@@ -3,13 +3,19 @@ import {Link} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import AppsIcon from '@material-ui/icons/Apps'
 import ExitToApp from '@material-ui/icons/ExitToApp'
+import GitHubIcon from '@material-ui/icons/GitHub';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import InstagramIcon from '@material-ui/icons/Instagram';
 import IconButton from "@material-ui/core/IconButton";
 import {Avatar, Button,  Grid,  Menu, MenuItem, Tooltip} from "@material-ui/core";
 import { logout } from "../actions/userActions"
 
 const Header = ({location}) => {
     const [anchorEl, setAnchorEl] = useState(null)
+    const [socialAnchorEl, setSocialAnchorEl] = useState(null)
     const open = Boolean(anchorEl)
+    const openSocials = Boolean(socialAnchorEl)
     const dispatch = useDispatch()
     const userLogin = useSelector(state => state.userLogin)
     const {userInfo} = userLogin
@@ -23,8 +29,14 @@ const Header = ({location}) => {
     const handleClick = ({currentTarget}) => {
         setAnchorEl(currentTarget)
     }
+    const handleSocialClick = ({currentTarget}) => {
+        setSocialAnchorEl(currentTarget)
+    }
     const handleClose = () => {
         setAnchorEl(null)
+    }
+    const handleSocialClose = () => {
+        setSocialAnchorEl(null)
     }
 
     const logoutHandler = () => {
@@ -37,10 +49,20 @@ const Header = ({location}) => {
             userInfo ? (
                 <div>
                     <Tooltip title='Get in touch with us'>
-                        <IconButton>
+                        <IconButton onClick={handleSocialClick}>
                             <AppsIcon className='app-icon'/>
                         </IconButton>
                     </Tooltip>
+                    <Menu anchorEl={socialAnchorEl}
+                        open={openSocials}
+                        onClose={handleSocialClose}
+                        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
+                        <MenuItem component='a' href='http://www.github.com/bhavyawahie'><Button className='social-btn' startIcon={<GitHubIcon fontSize='small'/>}>Github</Button></MenuItem>
+                        <MenuItem component='a' href='http://www.linkedin.com/in/bhavyawahie'><Button className='social-btn' startIcon={<LinkedInIcon fontSize='small'/>}>Linkedin</Button></MenuItem>
+                        <MenuItem component='a' href='http://www.twitter.com/bhavyawahie'><Button className='social-btn' startIcon={<TwitterIcon fontSize='small'/>}>twitter</Button></MenuItem>
+                        <MenuItem component='a' href='http://www.instagram.com/bhavyawahie'><Button className='social-btn'  startIcon={<InstagramIcon fontSize='small'/>}>instagram</Button></MenuItem>
+                    </Menu>
                     <Tooltip title='Account'>
                         <IconButton onClick={handleClick} size='small'>
                             <Avatar>{userInfo.name.charAt(0).toUpperCase()}</Avatar>
