@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import Alert from '@material-ui/lab/Alert'
-import { Button, Card, Container, TextField } from '@material-ui/core'
+import { Button, Card, Collapse, Container, IconButton, TextField } from '@material-ui/core'
+import CloseIcon from '@material-ui/icons/Close';
 import Error from '../components/Error'
 import Header from '../components/Header'
 import Loader from '../components/Loader'
 import { register } from '../actions/userActions'
 
 const registerScreen = ({history, location}) => {
+    const [openWarning, setOpenWarning] = useState(true)
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -38,7 +40,7 @@ const registerScreen = ({history, location}) => {
         <>
             <Header location={location}/>
             {error && <Error error={error}/>}
-            {validationError && <Alert severity='warning'>{validationError}</Alert>}
+            {validationError && <Collapse in={openWarning}><Alert severity='warning' action={<IconButton aria-label="close" color="inherit" size="small"onClick={() => {setOpenWarning(false);}}><CloseIcon fontSize="inherit" /></IconButton>}>{validationError}</Alert></Collapse>}
             {loading && <Loader/>}
             <Card className='register-card'> 
                 <Container maxWidth="sm">
