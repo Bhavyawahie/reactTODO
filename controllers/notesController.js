@@ -31,7 +31,7 @@ const addNotes = asyncHandler(async (req, res) => {
 // @access: Private
 
 const deleteNotes = asyncHandler(async (req, res) => {
-    const note = await Note.findOne({id: req.params.id})
+    const note = await Note.findOne({id: req.params.id, user: req.user})
     if(note) {
         await Note.findOneAndRemove({id: req.params.id})
         res.json('Note removed successfully!')
@@ -41,8 +41,27 @@ const deleteNotes = asyncHandler(async (req, res) => {
     }
 })
 
+// @desc:   Update notes from the user's collection of notes
+// @route:  Put /api/notes/:id
+// @access: Private
+
+const editNotes = asyncHandler(async (req, res) => {
+    const {title, content} = req.body
+    const note = await Note.findOne({id: req.params.id, user: req.user})
+    if(note) {
+            note.title =  title || note.title
+            note.content =  content || note.content
+            await note.save()
+            res.json('Note Updated Successfully!')
+    }
+    else {
+        res.status(404).json('Message: Note not found!')
+    }
+})
+
 module.exports = {
     getNotes,
     addNotes, 
-    deleteNotes
+    deleteNotes,
+    editNotes
 }
