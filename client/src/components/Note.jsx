@@ -1,7 +1,7 @@
 import React from "react"
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline'
 
-const Note = ({id, title, content, onDelClick, onNoteClick, modelOpener}) => {
+const Note = ({id, title, content, onDelClick, onNoteClick}) => {
     const delHandler = (e) => {
         e.stopPropagation()
         onDelClick(id)
