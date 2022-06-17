@@ -1,4 +1,4 @@
-import { NOTE_CREATE_FAIL, NOTE_CREATE_REQUEST, NOTE_CREATE_RESET, NOTE_CREATE_SUCCESS, NOTE_DELETE_FAIL, NOTE_DELETE_REQUEST, NOTE_DELETE_SUCCESS, NOTE_LIST_FAIL, NOTE_LIST_REQUEST, NOTE_LIST_RESET, NOTE_LIST_SUCCESS, NOTE_UPDATE_FAIL, NOTE_UPDATE_REQUEST, NOTE_UPDATE_SUCCESS } from "../constants/noteConstants";
+import { NOTE_CREATE_FAIL, NOTE_CREATE_REQUEST, NOTE_CREATE_RESET, NOTE_CREATE_SUCCESS, NOTE_CURRENT_RESET, NOTE_CURRENT_SET, NOTE_DELETE_FAIL, NOTE_DELETE_REQUEST, NOTE_DELETE_SUCCESS, NOTE_LIST_FAIL, NOTE_LIST_REQUEST, NOTE_LIST_RESET, NOTE_LIST_SUCCESS, NOTE_UPDATE_FAIL, NOTE_UPDATE_REQUEST, NOTE_UPDATE_SUCCESS } from "../constants/noteConstants";
 
 export const noteListReducer = (state = { notes: [] }, action) => {
     switch (action.type) {
@@ -89,5 +89,18 @@ export const noteUpdateReducer = (state={}, action) => {
     
         default:
             return state
+    }
+}
+
+export const noteCurrentSetReducer = (state={}, action) => {
+    switch(action.type) {
+        case NOTE_CURRENT_SET:
+            return {
+                currentNote: action.payload
+            }
+        case NOTE_CURRENT_RESET:
+            return {}
+        default:
+            return state        
     }
 }
