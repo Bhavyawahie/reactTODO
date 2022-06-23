@@ -13,7 +13,7 @@ const loginScreen = ({history, location}) => {
     const dispatch = useDispatch()
     const userLogin = useSelector(state => state.userLogin)
     const {loading, error, userInfo} = userLogin
-    const redirect = location.seach ? location.search.split('=')[1] : '/note'
+    const redirect = location.search ? location.search.split('=')[1] : '/note'
     const btnStyle = { margin: '10% 0' }
     
     useEffect(() => {
