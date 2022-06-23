@@ -7,14 +7,14 @@ import Header from '../components/Header';
 import Loader from '../components/Loader';
 import Note from '../components/Note'
 import NotePopup from '../components/NotePopup';
-import { NOTE_CREATE_RESET } from '../constants/noteConstants';
+import { NOTE_CREATE_RESET, NOTE_CURRENT_RESET, NOTE_CURRENT_SET } from '../constants/noteConstants';
 import { createNote, deleteNote, listNotes, updateNote } from '../actions/noteActions';
 
-let targetElement
 const notesScreen = ({history, location}) => {
-    const [open, setOpen] = useState(false);
-    const [popupNote, setPopupNote] = useState({})
+    const [open, setOpen] = useState(false)
     const dispatch = useDispatch()
+    const noteCurrentSet = useSelector(state => state.noteCurrentSet)
+    const {currentNote} = noteCurrentSet
     const noteList = useSelector(state => state.noteList)
     const {loading, notes, error} = noteList
     const noteCreate = useSelector(state => state.noteCreate)
@@ -49,17 +49,14 @@ const notesScreen = ({history, location}) => {
         dispatch(updateNote(updatedNote, id))
     }
 
-    const dialogOpener = (id, e) => {
-        e.stopPropagation()
-        setPopupNote(notes.filter(note => note.id === id)[0])
-        targetElement = e.target
-        targetElement.classList.add('gayab') 
+    const dialogOpenHandler = (id) => {
+        dispatch({type: NOTE_CURRENT_SET , payload: notes.filter(note => note.id === id)[0]})
         setOpen(true);
     }
 
     const dialogCloser = () => {
-        targetElement.classList.remove('gayab')
         setOpen(false)
+        dispatch({type: NOTE_CURRENT_RESET})
     }
 
 
@@ -80,13 +77,14 @@ const notesScreen = ({history, location}) => {
                             title={note.title} 
                             content={note.content}
                             onDelClick={noteDeleteHandler}
-                            onNoteClick={dialogOpener}
+                            onNoteClick={dialogOpenHandler}
+                            hideNote={currentNote == note && true}
                             /> 
                         )
                     })
                 }
+                <NotePopup open={open} onClose={dialogCloser} onSave={noteUpdateHandler}/>
                 </Grid>
-                <NotePopup open={open} onClose={dialogCloser} note={popupNote} onSave={noteUpdateHandler}/>
             </div>)
             }
         </>    
