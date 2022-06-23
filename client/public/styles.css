@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 * {
   padding: 0;
   margin: 0;
@@ -5,7 +7,7 @@
 }
 
 html {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 #root {
@@ -57,14 +59,19 @@ footer p {
   background: #fff;
   border: 1px solid rgba(167, 167, 167, 0.329);
   border-radius: 7px;
-  padding: 10px;
+  padding: 18px 25px;
   width: 240px;
   margin: 16px;
 }
 
+.note:hover {
+  box-shadow: 0px -1px 3px 1px rgb(232, 232, 232);
+}
+
 .note h1 {
   font-size: 1.1em;
-  margin-bottom: 6px;
+  margin-bottom: 13px;
+  font-weight: 500;
 }
 
 .note p {
@@ -72,11 +79,11 @@ footer p {
   margin-bottom: 10px;
   white-space: pre-wrap;
   word-wrap: break-word;
+  font-weight: 300;
 }
 .note button {
   position: relative;
   float: right;
-  margin-right: 10px;
   color: #f5ba13;
   width: 36px;
   height: 36px;
@@ -89,11 +96,11 @@ footer p {
 .note-form {
   position: relative;
   width: 480px;
-  margin: 30px auto 30px auto;
+  margin: 50px auto 50px auto;
   background: #fff;
   padding: 15px;
   border-radius: 7px;
-  box-shadow: 0 1px 5px rgba(138, 137, 137, 0.479);
+  box-shadow: 0 1px 5px rgba(123, 123, 123, 0.479);
 }
 .note-form-title,
 .note-form-body {
@@ -105,6 +112,7 @@ footer p {
   font-family: inherit;
   resize: none;
 }
+
 .note-form-submission {
   position: absolute;
   right: 18px;
@@ -138,3 +146,10 @@ footer p {
   margin: 20px auto;
 }
 
+.MuiPaper-root {
+  padding: 18px 20px;
+}
+
+.hide {
+  visibility: hidden;
+}
