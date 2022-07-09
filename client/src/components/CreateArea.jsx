@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import AddIcon from "@material-ui/icons/Add"
+import { InputBase } from "@material-ui/core";
 
 const CreateArea = (props) => {
     const [isExpanded, setIsExpanded] = useState(false)
@@ -33,9 +34,9 @@ const CreateArea = (props) => {
         <div>
             <form className="note-form">
                 {isExpanded && (
-                    <input name="title" placeholder="Title" onChange={inputChangeHandler} value={input.title} autoComplete="off" className='note-form-title'/>
+                    <InputBase name="title" placeholder="Title" onChange={inputChangeHandler} value={input.title} autoComplete="off" className='note-form-title' multiline/>
                 )}
-                <textarea name="content" placeholder="Take a note..." onChange={inputChangeHandler} onClick={expandTextField}  value={input.content} rows={isExpanded ? 3 : 1} className='note-form-body'/>
+                <InputBase name='content' placeholder="Take a note..." onChange={inputChangeHandler} onClick={expandTextField} value={input.content}  className='note-form-body' multiline/>
                 <button onClick={submissionHandler} disabled={input.content.length<1} className='note-form-submission'><AddIcon/></button>
             </form>
         </div>
