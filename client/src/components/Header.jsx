@@ -19,12 +19,13 @@ const Header = ({location}) => {
     const dispatch = useDispatch()
     const userLogin = useSelector(state => state.userLogin)
     const {userInfo} = userLogin
+    let userName=""
     if(userInfo) {
         let fName = userInfo.name.split(' ')[0]
         let lName = userInfo.name.split(' ')[1]
         fName = fName.charAt(0).toUpperCase() + fName.slice(1)
         lName = lName.charAt(0).toUpperCase() + lName.slice(1)
-        var userName = fName + ' ' + lName
+        userName = fName + ' ' + lName
     }
     const handleClick = ({currentTarget}) => {
         setAnchorEl(currentTarget)
@@ -58,10 +59,10 @@ const Header = ({location}) => {
                         onClose={handleSocialClose}
                         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
-                        <MenuItem component='a' href='http://www.github.com/bhavyawahie'><Button className='social-btn' startIcon={<GitHubIcon fontSize='small'/>}>Github</Button></MenuItem>
-                        <MenuItem component='a' href='http://www.linkedin.com/in/bhavyawahie'><Button className='social-btn' startIcon={<LinkedInIcon fontSize='small'/>}>Linkedin</Button></MenuItem>
-                        <MenuItem component='a' href='http://www.twitter.com/bhavyawahie'><Button className='social-btn' startIcon={<TwitterIcon fontSize='small'/>}>twitter</Button></MenuItem>
-                        <MenuItem component='a' href='http://www.instagram.com/bhavyawahie'><Button className='social-btn'  startIcon={<InstagramIcon fontSize='small'/>}>instagram</Button></MenuItem>
+                        <MenuItem component='a' href='http://www.github.com/bhavyawahie' target='_blank'><Button className='social-btn' startIcon={<GitHubIcon fontSize='small'/>}>Github</Button></MenuItem>
+                        <MenuItem component='a' href='http://www.linkedin.com/in/bhavyawahie' target='_blank'><Button className='social-btn' startIcon={<LinkedInIcon fontSize='small'/>}>Linkedin</Button></MenuItem>
+                        <MenuItem component='a' href='http://www.twitter.com/bhavyawahie' target='_blank'><Button className='social-btn' startIcon={<TwitterIcon fontSize='small'/>}>twitter</Button></MenuItem>
+                        <MenuItem component='a' href='http://www.instagram.com/bhavyawahie' target='_blank'><Button className='social-btn'  startIcon={<InstagramIcon fontSize='small'/>}>instagram</Button></MenuItem>
                     </Menu>
                     <Tooltip title='Account'>
                         <IconButton onClick={handleClick} size='small'>
@@ -107,7 +108,6 @@ const Header = ({location}) => {
                 <div>
                     <Link to={location.pathname === '/' ? '/register' : '/' }>
                         <Button variant='contained' color='primary'>{location.pathname === '/' ? `Sign up` : `Log in` }</Button>
-
                     </Link>
                 </div>
             )
