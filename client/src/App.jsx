@@ -1,18 +1,22 @@
 import React from "react"
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Footer from "./components/Footer"
 import registerScreen from "./screens/registerScreen"
 import loginScreen from "./screens/loginScreen"
 import notesScreen from "./screens/notesScreen"
+import notFound from "./components/NotFound"
 
 
 const App = () => {
     return (
         <Router>
             <main>
-                <Route path="/note" exact component={notesScreen} />
-                <Route path="/" exact component={loginScreen} />
-                <Route path="/register" exact component={registerScreen} />
+                <Switch>
+                    <Route path="/note" exact component={notesScreen} />
+                    <Route path="/" exact component={loginScreen} />
+                    <Route path="/register" exact component={registerScreen} />
+                    <Route component={notFound}/>
+                </Switch>
             </main>
             <Footer/>
         </Router>
