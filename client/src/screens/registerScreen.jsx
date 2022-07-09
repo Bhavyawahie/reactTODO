@@ -8,6 +8,7 @@ import Loader from '../components/Loader'
 import { register } from '../actions/userActions'
 
 const registerScreen = ({history, location}) => {
+    const [openWarning, setOpenWarning] = useState(true)
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -38,7 +39,7 @@ const registerScreen = ({history, location}) => {
         <>
             <Header location={location}/>
             {error && <Error error={error}/>}
-            {validationError && <Alert severity='warning'>{validationError}</Alert>}
+            {validationError && <Collapse in={openWarning}><Alert severity='warning' action={<IconButton aria-label="close" color="inherit" size="small"onClick={() => {setOpenWarning(false);}}><CloseIcon fontSize="inherit" /></IconButton>}>{validationError}</Alert></Collapse>}
             {loading && <Loader/>}
             <Container>
                 <Grid direction='row-reverse' alignItems='center'  style={{ minHeight: '80vh' }}>
