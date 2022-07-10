@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import Alert from '@material-ui/lab/Alert'
-import { Button, Card, Container, Grid, TextField, Typography } from '@material-ui/core'
+import { Button, Card, Collapse, Container, Grid, IconButton, TextField, Typography } from '@material-ui/core'
+import CloseIcon from '@material-ui/icons/Close';
 import Error from '../components/Error'
 import Header from '../components/Header'
 import Loader from '../components/Loader'
@@ -30,6 +31,8 @@ const registerScreen = ({history, location}) => {
         e.preventDefault()
         if(password !== confirmPassword) {
             setValidationError('Passwords Do not Match')
+        } else if(name.split(' ')[1] === undefined) {
+            setValidationError('Full Name is required!')
         } else {
             dispatch(register(name, email, password))
         }
@@ -50,7 +53,7 @@ const registerScreen = ({history, location}) => {
                         <Container maxWidth="sm">
                         <h2>Sign Up with Keeper</h2>
                             <form>
-                                <TextField placeholder='Enter your Name' label='Name' type="name"
+                                <TextField placeholder='Enter your Full Name' label='Name' type="name"
                                     name={name}
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
